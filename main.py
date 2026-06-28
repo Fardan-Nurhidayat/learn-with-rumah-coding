@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def scrap_city(city , url , page=1):
-    print("mulai melakukan scraping")
+    print(f"mulai scraping untuk kota {city} halaman ke-{page}")
     headers = {
         "User-Agent" : "Mozilla/5.0 (Windows NT 10.0: Win64; x64)"
     }
@@ -56,12 +56,19 @@ def scrap_city(city , url , page=1):
 
 cities = {
     "Jakarta Timur" : "https://www.rumah123.com/jual/jakarta-timur/rumah/",
+    "Jakarta Barat" : "https://www.rumah123.com/jual/jakarta-barat/rumah/",
+    "Jakarta Selatan" : "https://www.rumah123.com/jual/jakarta-selatan/rumah/",
+    "Jakarta Utara" : "https://www.rumah123.com/jual/jakarta-utara/rumah/",
+    "Jakarta Pusat" : "https://www.rumah123.com/jual/jakarta-pusat/rumah/"
 }
 
-def start_scraping(cities , max_page_per_city=10):
+
+
+
+def start_scraping(cities , max_page_per_city=40):
     data = []
     for city , url in cities.items():
-        for page in range(1 , max_page_per_city + 1):
+        for page in range(31 , max_page_per_city + 1):
             page_data = scrap_city(city , url , page)
             data.extend(page_data)
     return data
@@ -70,4 +77,4 @@ data = start_scraping(cities)
 
 # Save to csv
 df = pd.DataFrame(data)
-df.to_csv("data.csv" , index=False)
+df.to_csv("data2.csv" , index=False)
